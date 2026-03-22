@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using LibreriaBazarProyecto.Data;
 using LibreriaBazarProyecto.Models;
 
@@ -24,15 +20,11 @@ namespace LibreriaBazarProyecto.Controllers
         // GET: Productos/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             Producto producto = db.Productos.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
+            if (producto == null) return HttpNotFound();
+
             return View(producto);
         }
 
@@ -42,6 +34,7 @@ namespace LibreriaBazarProyecto.Controllers
             return View();
         }
 
+        // POST: Productos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_producto,nombre_producto,precio,stock,id_categoria")] Producto producto)
@@ -52,26 +45,21 @@ namespace LibreriaBazarProyecto.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(producto);
         }
 
         // GET: Productos/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             Producto producto = db.Productos.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
+            if (producto == null) return HttpNotFound();
+
             return View(producto);
         }
 
-      
+        // POST: Productos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id_producto,nombre_producto,precio,stock,id_categoria")] Producto producto)
@@ -88,15 +76,11 @@ namespace LibreriaBazarProyecto.Controllers
         // GET: Productos/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             Producto producto = db.Productos.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
+            if (producto == null) return HttpNotFound();
+
             return View(producto);
         }
 
@@ -113,10 +97,7 @@ namespace LibreriaBazarProyecto.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            if (disposing) db.Dispose();
             base.Dispose(disposing);
         }
     }
