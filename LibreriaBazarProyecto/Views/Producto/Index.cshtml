@@ -1,0 +1,80 @@
+﻿@model IEnumerable<LibreriaBazarProyecto.Models.Producto>
+
+@{
+    ViewBag.Title = "Productos";
+}
+
+<div class="container mt-4">
+
+    <!-- Encabezado -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary"> Catálogo de Productos</h2>
+        @Html.ActionLink("➕ Nuevo Producto", "Create", null, new { @class = "btn btn-success" })
+    </div>
+
+    <!-- Card contenedora -->
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Categoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-center">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold text-start">
+                                 @Html.DisplayFor(modelItem => item.nombre_producto)
+                            </td>
+
+                            <td>
+                                <span class="badge bg-success fs-6">
+                                    $ @Html.DisplayFor(modelItem => item.precio)
+                                </span>
+                            </td>
+
+                            <td>
+                                @if (item.stock > 10)
+                                {
+                                    <span class="badge bg-primary">@item.stock</span>
+                                }
+                                else if (item.stock > 0)
+                                {
+                                    <span class="badge bg-warning text-dark">@item.stock</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Agotado</span>
+                                }
+                            </td>
+
+                            <td>
+                                <span class="badge bg-secondary">
+                                    @Html.DisplayFor(modelItem => item.id_categoria)
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="btn-group" role="group">
+                                    @Html.ActionLink("✏️", "Edit", new { id = item.id_producto }, new { @class = "btn btn-outline-primary btn-sm" })
+                                    @Html.ActionLink("🔍", "Details", new { id = item.id_producto }, new { @class = "btn btn-outline-info btn-sm" })
+                                    @Html.ActionLink("🗑️", "Delete", new { id = item.id_producto }, new { @class = "btn btn-outline-danger btn-sm" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>

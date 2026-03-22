@@ -1,0 +1,45 @@
+﻿@model IEnumerable<LibreriaBazarProyecto.Models.Venta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto.nombre_producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producto.nombre_producto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_venta }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_venta }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_venta })
+        </td>
+    </tr>
+}
+
+</table>
